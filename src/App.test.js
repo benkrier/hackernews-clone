@@ -22,14 +22,19 @@ describe("App", () => {
 });
 
 describe("Search", () => {
+  const props = {
+    value: "redux",
+    onChange: jest.fn(),
+    onSubmit: jest.fn()
+  };
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<Search>Search</Search>, div);
+    ReactDOM.render(<Search {...props}>Search</Search>, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 
   test("has a valid snapshot", () => {
-    const component = renderer.create(<Search>Search</Search>);
+    const component = renderer.create(<Search {...props}>Search</Search>);
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -40,7 +45,8 @@ describe("Table", () => {
     list: [
       { title: "1", author: "1", num_comments: 1, points: 2, objectID: "y" },
       { title: "2", author: "2", num_comments: 1, points: 2, objectID: "z" }
-    ]
+    ],
+    onDismiss: jest.fn()
   };
 
   it("renders without crashing", () => {
@@ -63,14 +69,16 @@ describe("Table", () => {
 });
 
 describe("Button", () => {
+  const onClick = jest.fn();
+
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<Button>More</Button>, div);
+    ReactDOM.render(<Button onClick={onClick}>More</Button>, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 
   test("has a valid snapshot", () => {
-    const component = renderer.create(<Button>More</Button>);
+    const component = renderer.create(<Button onClick={onClick}>More</Button>);
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

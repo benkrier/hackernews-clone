@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
+
+// Components
 import Search from "./Search";
 import Table from "./Table";
 import Button from "./Button";
+
+//Styles
 import "./App.css";
 
 const DEFAULT_QUERY = "redux";

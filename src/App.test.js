@@ -46,7 +46,9 @@ describe("Table", () => {
       { title: "1", author: "1", num_comments: 1, points: 2, objectID: "y" },
       { title: "2", author: "2", num_comments: 1, points: 2, objectID: "z" }
     ],
-    onDismiss: jest.fn()
+    onDismiss: jest.fn(),
+    sortKey: "TITLE",
+    isSortReverse: false
   };
 
   it("renders without crashing", () => {

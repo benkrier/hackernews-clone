@@ -34,7 +34,8 @@ class App extends Component {
       searchKey: "",
       searchTerm: DEFAULT_QUERY,
       error: null,
-      isLoading: false
+      isLoading: false,
+      sortKey: "NONE"
     };
 
     this.needsToSearchTopStories = this.needsToSearchTopStories.bind(this);
@@ -43,6 +44,7 @@ class App extends Component {
     this.onSearchChange = this.onSearchChange.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
+    this.onSort = this.onSort.bind(this);
   }
 
   needsToSearchTopStories(searchTerm) {
@@ -98,6 +100,10 @@ class App extends Component {
     });
   }
 
+  onSort(sortKey) {
+    this.setState({ sortKey });
+  }
+
   componentDidMount() {
     this._isMounted = true;
 
@@ -111,7 +117,14 @@ class App extends Component {
   }
 
   render() {
-    const { searchTerm, results, searchKey, error, isLoading } = this.state;
+    const {
+      searchTerm,
+      results,
+      searchKey,
+      error,
+      isLoading,
+      sortKey
+    } = this.state;
     const page =
       (results && results[searchKey] && results[searchKey].page) || 0;
     const list =
@@ -133,7 +146,12 @@ class App extends Component {
             <p>Something went wrong.</p>
           </div>
         ) : (
-          <Table list={list} onDismiss={this.onDismiss} />
+          <Table
+            list={list}
+            sortKey={sortKey}
+            onSort={this.onSort}
+            onDismiss={this.onDismiss}
+          />
         )}
         <div className="interactions">
           <ButtonWithLoading
